@@ -6,7 +6,7 @@ import eu.javaexperience.database.ConnectionBuilder;
 import eu.javaexperience.database.ConnectionCreator;
 import eu.javaexperience.database.JdbcConnectionPool;
 
-public class GsdbTestSqlite extends GsdbTest
+public class GsdbSqliteTest extends GsdbTest
 {
 	protected static String deleteOnExit(String file)
 	{
@@ -14,7 +14,7 @@ public class GsdbTestSqlite extends GsdbTest
 		return file;
 	}
 	
-	public GsdbTestSqlite()
+	public GsdbSqliteTest()
 	{
 		super
 		(
