@@ -365,6 +365,8 @@ public class GenericStorage
 	public static void untraceObject(GenericStorable gs)
 	{
 		gs.getGenericStoreData().id = ObjectUntrackedUnstored;
+		gs.getGenericStoreData().owner = null;
+		gs.getGenericStoreData().state = GenericStorageObjectState.DELETED;
 	}
 	
 	

@@ -1,5 +1,7 @@
 package hu.ddsi.java.database;
 
+import hu.ddsi.java.database.GenericStoreData.GenericStorageObjectState;
+
 public class GenericStoreData
 {
 	public GenericStoreData(){}
@@ -45,6 +47,7 @@ public class GenericStoreData
 		MODIFIED(true),
 		UNDER_SAVE(false),
 		PERSISTED(false),
+		DELETED(false)
 		
 		;
 		

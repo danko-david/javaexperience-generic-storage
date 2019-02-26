@@ -140,7 +140,7 @@ public abstract class GsdbTest
 	}
 	
 	@Test
-	public void test_simpleSelect_DropKeepSession() throws Throwable
+	public void test_simpleSelect_DropSession() throws Throwable
 	{
 		DUser usr = null; 
 		try(GenericStoreDatabase gdb = openTestDatabase(true))
@@ -793,9 +793,34 @@ public abstract class GsdbTest
 			testStringSaveSearch(gdb, 6, "\\'\"Dr Wu\\'\\\"s \"Doomsday Machine\"\"");
 			testStringSaveSearch(gdb, 7, "\\\''\\\"\\\'\\\"");
 		}
-		
 	}
 	
+	@Test
+	public void test_remove() throws Throwable
+	{
+		try(GenericStoreDatabase gdb = openTestDatabase(true))
+		{
+			DbStringListEntry e1 = new DbStringListEntry();
+			e1.entry = "Str1";
+			
+			DbStringListEntry e2 = new DbStringListEntry();
+			e2.entry = "Str1";
+			
+			GenericStorage.storeObject(e1, gdb);
+			GenericStorage.storeObject(e2, gdb);
+			
+			
+			assertTrue(gdb == GenericStorage.getOwnerDatabase(e1));
+			assertTrue(gdb == GenericStorage.getOwnerDatabase(e2));
+			
+			GenericStorage.removeObject(e1, gdb);
+			
+			assertTrue(null == GenericStorage.getOwnerDatabase(e1));
+			assertTrue(gdb == GenericStorage.getOwnerDatabase(e2));
+		}
+	}
+	
+	//TODO getOwnerDatabase should return null after object removed
 	
 	//TODO offset, limit, orderBy
 	
