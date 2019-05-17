@@ -1,10 +1,8 @@
 package hu.ddsi.java.database.test;
 
-import hu.ddsi.java.database.F;
 import hu.ddsi.java.database.GenericStorage;
 import hu.ddsi.java.database.GenericStoreDatabase;
 import hu.ddsi.java.database.GenericStoreException;
-import hu.ddsi.java.database.L;
 import hu.ddsi.java.database.Limit;
 import hu.ddsi.java.database.Offset;
 import hu.ddsi.java.database.OrderBy;
@@ -30,6 +28,8 @@ import org.junit.Test;
 import eu.javaexperience.database.ConnectionCreator;
 import eu.javaexperience.database.ConnectionPool;
 import eu.javaexperience.database.JDBC;
+import eu.javaexperience.query.F;
+import eu.javaexperience.query.L;
 import eu.javaexperience.reflect.Mirror;
 import eu.javaexperience.time.TimeCalc;
 import static org.junit.Assert.*;

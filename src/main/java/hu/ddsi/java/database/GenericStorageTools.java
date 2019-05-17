@@ -1,11 +1,11 @@
 package hu.ddsi.java.database;
 
-import hu.ddsi.java.database.GenericStoreQueryBuilder.LogicalGroup;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import eu.javaexperience.interfaces.simple.publish.SimplePublish1;
+import eu.javaexperience.query.F;
+import eu.javaexperience.query.LogicalGroup;
 
 public class GenericStorageTools
 {

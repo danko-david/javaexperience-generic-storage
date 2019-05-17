@@ -6,14 +6,8 @@ import java.util.Map;
 import java.util.Set;
 
 import eu.javaexperience.interfaces.simple.SimpleGet;
+import eu.javaexperience.query.LogicalGroup;
 import eu.javaexperience.reflect.Mirror;
-import hu.ddsi.java.database.FieldData;
-import hu.ddsi.java.database.GenericStorable;
-import hu.ddsi.java.database.GenericStoreDataReader;
-import hu.ddsi.java.database.GenericStoreDataWriter;
-import hu.ddsi.java.database.GenericStoreDatabase;
-import hu.ddsi.java.database.GenericStoreQueryBuilder.LogicalGroup;
-import hu.ddsi.java.database.GenericStoreQueryResult;
 
 public class PermissionWrappedGdb extends GenericStoreDatabase
 {

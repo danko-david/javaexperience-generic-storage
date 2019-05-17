@@ -30,8 +30,9 @@ import eu.javaexperience.interfaces.simple.getBy.GetBy1;
 import eu.javaexperience.interfaces.simple.getBy.GetByTools;
 import eu.javaexperience.interfaces.simple.publish.SimplePublish1;
 import eu.javaexperience.math.MathTools;
+import eu.javaexperience.query.F;
+import eu.javaexperience.query.LogicalGroup;
 import hu.ddsi.java.database.GenericStoreData.GenericStorageObjectState;
-import hu.ddsi.java.database.GenericStoreQueryBuilder.LogicalGroup;
 import hu.ddsi.java.database.GenericStoreQueryResult.ResultUnit;
 
 /**

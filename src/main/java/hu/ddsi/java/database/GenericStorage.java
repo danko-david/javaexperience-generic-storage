@@ -1,7 +1,6 @@
 package hu.ddsi.java.database;
 
 import hu.ddsi.java.database.GenericStoreData.GenericStorageObjectState;
-import hu.ddsi.java.database.GenericStoreQueryBuilder.LogicalGroup;
 import hu.ddsi.java.database.JavaSQLImp.SqlStorage;
 import hu.ddsi.java.database.fieldAnnotations.GenericStoreIgnore;
 
@@ -17,6 +16,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import eu.javaexperience.collection.CollectionTools;
 import eu.javaexperience.collection.map.SmallMap;
+import eu.javaexperience.query.F;
+import eu.javaexperience.query.LogicalGroup;
 import eu.javaexperience.reflect.Mirror;
 import eu.javaexperience.semantic.references.MayNull;
 
@@ -230,7 +231,7 @@ public class GenericStorage
 		}
 	}
 	
-	public static <T extends GenericStorable> void getAllObjectsByQuery(Class<? extends T> cls,LogicalGroup lg,Collection<T> coll,GenericStoreDatabase gdb, GsdbExtraCaluse... extra) throws GenericStoreException
+	public static <T extends GenericStorable> void getAllObjectsByQuery(Class<? extends T> cls, LogicalGroup lg,Collection<T> coll,GenericStoreDatabase gdb, GsdbExtraCaluse... extra) throws GenericStoreException
 	{
 		try
 		{
