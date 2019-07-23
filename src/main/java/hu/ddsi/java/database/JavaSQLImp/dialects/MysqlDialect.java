@@ -20,14 +20,29 @@ public class MysqlDialect implements SqlDialect
 	{
 		try
 		{
-			String versionString = JDBC.getString(conn, "SELECT @@VERSION");
-			versionString = versionString.toLowerCase();
-			return versionString.contains("mysql") || versionString.contains("mariadb");	
+			{
+				String versionString = JDBC.getString(conn, "SELECT @@VERSION");
+				versionString = versionString.toLowerCase();
+				if(versionString.contains("mysql") || versionString.contains("mariadb"))
+				{
+					return true;
+				}
+			}
+			
+			{
+				String versionCommentString = JDBC.getString(conn, "SELECT @@version_comment");
+				versionCommentString = versionCommentString.toLowerCase();
+				if(versionCommentString.contains("debian"))
+				{
+					return true;
+				}
+			}
 		}
 		catch(Exception e)
 		{
 			return false;
 		}
+		return false;
 	}
 
 	@Override
