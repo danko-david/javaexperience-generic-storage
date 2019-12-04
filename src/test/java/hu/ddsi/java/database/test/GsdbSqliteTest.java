@@ -24,7 +24,8 @@ public class GsdbSqliteTest extends GsdbTest
 				(
 					ConnectionBuilder.sqlite, 
 					"", -1, "", "",
-					deleteOnExit("/tmp/test."+System.currentTimeMillis()+".sqlite"))
+					deleteOnExit("/tmp/test."+System.currentTimeMillis()+".sqlite")
+				)
 			)
 		);
 	}

@@ -8,10 +8,8 @@ import java.util.Collection;
 
 import eu.javaexperience.database.JDBC;
 import eu.javaexperience.exceptions.UnimplementedCaseException;
-import eu.javaexperience.text.StringTools;
 import hu.ddsi.java.database.FieldData;
 import hu.ddsi.java.database.JavaSQLImp.SqlDialect;
-import hu.ddsi.java.database.JavaSQLImp.SqlStorage;
 
 public class MysqlDialect implements SqlDialect
 {

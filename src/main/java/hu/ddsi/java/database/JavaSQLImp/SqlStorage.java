@@ -6,6 +6,7 @@ import java.lang.reflect.Array;
 import java.lang.reflect.Modifier;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import eu.javaexperience.collection.list.NullList;
 import eu.javaexperience.database.JDBC;
 import eu.javaexperience.interfaces.simple.getBy.GetBy1;
 import eu.javaexperience.query.AtomicCondition;
@@ -42,8 +44,7 @@ public class SqlStorage extends GenericStoreDatabase implements Closeable//<Resu
 	final String quote;
 	final String strQuote;
 	private final String idSelect;
-	private final String idUpdate0;
-	private final String idUpdate1;
+	private final String idUpdate;
 	
 	public static final String baseDBName = GenericStorable.class.getName();
 	
@@ -59,8 +60,7 @@ public class SqlStorage extends GenericStoreDatabase implements Closeable//<Resu
 		quote = dialect.getFieldQuoteString();
 		strQuote = dialect.getStringQuote();
 		idSelect = "SELECT * FROM "+quote+baseDBName+quote+" WHERE "+quote+"do"+quote+"=0;";
-		idUpdate0 = "UPDATE "+quote+baseDBName+quote+" SET "+quote+"curId"+quote+"=";
-		idUpdate1 = " WHERE "+quote+"do"+quote+"=0;";
+		idUpdate = "UPDATE "+quote+baseDBName+quote+" SET "+quote+"curId"+quote+"= ?  WHERE "+quote+"do"+quote+"=0 AND "+quote+"curId"+quote+" = ?;";
 			
 		init();
 		
@@ -266,27 +266,31 @@ public class SqlStorage extends GenericStoreDatabase implements Closeable//<Resu
 	@Override
 	protected List<Long> reserveNextIDRangeAtomic(int size) throws Exception//TODO atomi növelés és visszaolvasás => do++
 	{
-		ArrayList<Long> ret = new ArrayList<>();
 		if(size > 0)
 		{
-			++modificationCount;
-			try(Statement st = connection.createStatement())
+			for(int i=0;i<150;++i)
 			{
-				try(ResultSet rs = st.executeQuery(idSelect))
+				++modificationCount;
+				long now = getCurrentId();
+				try(PreparedStatement st = connection.prepareStatement(idUpdate))
 				{
-					rs.next();
-					long first = rs.getLong("curId")+1;
-					long end = first+size;
-					st.execute(idUpdate0+(end-1)+idUpdate1);
-					
-					for(long l = first;l<end;++l)
+					st.setLong(1, now+size);
+					st.setLong(2, now);
+					if(st.executeUpdate() > 0)
 					{
-						ret.add(l);
+						ArrayList<Long> ret = new ArrayList<>();
+						long end = now+1+size;
+						for(long l = now+1;l<end;++l)
+						{
+							ret.add(l);
+						}
+						return ret;
 					}
 				}
 			}
+			throw new RuntimeException("Can't reserve next id range after 150 retry.");
 		}
-		return ret;
+		return NullList.instance;
 	}
 
 	@Override
