@@ -218,7 +218,7 @@ public class SqlStorage extends GenericStoreDatabase implements Closeable//<Resu
 	{
 		ArrayList<String> ret = new ArrayList<>();
 		DatabaseMetaData md = connection.getMetaData();
-		try(ResultSet rs = md.getTables(null, null, "%", null))
+		try(ResultSet rs = md.getTables(dbName, null, "%", null))
 		{
 			while (rs.next())
 			{
@@ -424,9 +424,8 @@ public class SqlStorage extends GenericStoreDatabase implements Closeable//<Resu
 	{
 		ArrayList<String> arr = new ArrayList<>();
 		DatabaseMetaData md = conn.getMetaData();
-	    try(ResultSet rs = md.getTables(null, null, "%", null))
-	    {
-		    
+		try(ResultSet rs = md.getTables(conn.getCatalog(), null, "%", null))
+		{
 			while(rs.next())
 			{
 				arr.add(rs.getString(3));
