@@ -349,7 +349,7 @@ public class GenericStorage
 	public static boolean isStored(GenericStorable gs)
 	{
 		GenericStoreData data = gs.getGenericStoreData();
-		return data != null && data.owner != null;
+		return data != null && data.owner != null && data.id > 0;
 	}
 	
 	public static GenericStoreDatabase getOwnerDatabase(GenericStorable gs)
