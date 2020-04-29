@@ -11,11 +11,16 @@ public class OrderBy implements GsdbExtraCaluse
 	@Override
 	public GsdbExtraClauseType getType()
 	{
-		return GsdbExtraClauseType.order;
+		return WellKnownGsdbExtraCaluses.order;
 	}
 	
 	public final boolean asc;
 	public final String field;
+	
+	public OrderBy()
+	{
+		this(null, false);
+	}
 	
 	public OrderBy(String field, boolean asc)
 	{

@@ -5,10 +5,15 @@ public class Limit implements GsdbExtraCaluse
 	@Override
 	public GsdbExtraClauseType getType()
 	{
-		return GsdbExtraClauseType.limit;
+		return WellKnownGsdbExtraCaluses.limit;
 	}
 	
 	public final int limit;
+	
+	public Limit()
+	{
+		this(0);
+	}
 	
 	public Limit(int limit)
 	{

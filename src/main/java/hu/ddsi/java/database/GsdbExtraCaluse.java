@@ -1,14 +1,22 @@
 package hu.ddsi.java.database;
 
+import eu.javaexperience.interfaces.ExternalDataAttached;
+
 public interface GsdbExtraCaluse
 {
 	public GsdbExtraClauseType getType();
 	
-	public static enum GsdbExtraClauseType
+	public static enum WellKnownGsdbExtraCaluses implements GsdbExtraClauseType
 	{
 		order,
 		offset,
 		limit,
-		group
+		group;
+
+		@Override
+		public String getType()
+		{
+			return name();
+		}
 	}
 }
